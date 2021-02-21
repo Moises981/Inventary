@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Inventary</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="item_product_count">Nombre:\nCantidad:</string>
+    <string name="item_product_data">%s \n(x%d)</string>
+    <string name="main_error_permission_denied">Lo siento, no tienes permiso para ver el inventario.</string>
+    <string name="main_error_server">Error en el servidor , intente de nuevo!</string>
+    <string name="main_error_remove">Lo siento , usted no tiene permiso de elminar algun producto!</string>
+</resources>
