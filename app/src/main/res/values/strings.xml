@@ -14,4 +14,25 @@
     <string name="main_error_permission_denied">Lo siento, no tienes permiso para ver el inventario.</string>
     <string name="main_error_server">Error en el servidor , intente de nuevo!</string>
     <string name="main_error_remove">Lo siento , usted no tiene permiso de elminar algun producto!</string>
+    <string name="main_dialog_remove_title">¿Desea eliminar producto?</string>
+    <string name="main_dialog_remove_message">Este producto será eliminado de forma permanente.</string>
+    <string name="main_dialog_remove_ok">Eliminar</string>
+    <string name="common_dialog_cancel">Cancelar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_product_hint_photoUrl">Url de foto</string>
+    <string name="add_product_hint_name">Nombre</string>
+    <string name="add_product_hint_quantity">Cantidad</string>
+    <string name="addProduct_message_validate_max_quantity">El valor debe ser menor a 1000.</string>
+    <string name="addProduct_message_added_error">No se pudo guardar , intente mas tarde.</string>
+    <string name="addProduct_title">Agregar producto</string>
+    <string name="addProduct_dialog_ok">Agregar</string>
+    <string name="addProduct_message_added_successfully">Producto agreado correctamente.</string>
+    <string name="addProduct_snackbar_action">OK</string>
+    <string name="common_validate_field_required">Este campo es requerido.</string>
+    <string name="common_validate_min_quantity">El valor debe ser mayor a 0.</string>
+    <string name="detailProduct_btnSave">Guardar</string>
+    <string name="detailProduct_update_success">Producto actualizado , ¿Desea seguir en esta ventana?</string>
+    <string name="detailProduct_snackbar_action">Ir</string>
+    <string name="dtailProduct_update_error">Error al actualizar , intente más tarde o revise la cantidad.</string>
 </resources>

@@ -15,17 +15,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 public class RealtimeDatabase {
-    private static final String PATH_PRODUCTS = "products";
-
     private FirebaseRealtimeDatabaseAPI mDatabaseAPI;
     private ChildEventListener mProductsChildEventListener;
 
     public RealtimeDatabase() {
         mDatabaseAPI = FirebaseRealtimeDatabaseAPI.getInstance();
-    }
-
-    private DatabaseReference getProductsReference() {
-        return mDatabaseAPI.getReference().child(PATH_PRODUCTS);
     }
 
     public void subscribeToProducts(ProductsEventListener listener) {
@@ -63,7 +57,7 @@ public class RealtimeDatabase {
                 }
             };
         }
-        getProductsReference().addChildEventListener(mProductsChildEventListener);
+        mDatabaseAPI.getProductsReference().addChildEventListener(mProductsChildEventListener);
     }
 
     private Product getProduct(DataSnapshot snapshot) {
@@ -76,24 +70,24 @@ public class RealtimeDatabase {
 
     public void unsuscribeToProducts() {
         if (mProductsChildEventListener != null) {
-            getProductsReference().removeEventListener(mProductsChildEventListener);
+            mDatabaseAPI.getProductsReference().removeEventListener(mProductsChildEventListener);
         }
     }
 
     public void removeProduct(Product product, BasicErrorEventCallback callback) {
-        getProductsReference().child(product.getId())
+        mDatabaseAPI.getProductsReference().child(product.getId())
                 .removeValue(new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                         if (error == null) {
                             callback.onSucess();
                         } else {
-                            switch (error.getCode()){
+                            switch (error.getCode()) {
                                 case DatabaseError.PERMISSION_DENIED:
-                                    callback.onError(MainEvent.ERROR_TO_REMOVE,R.string.main_error_remove);
+                                    callback.onError(MainEvent.ERROR_TO_REMOVE, R.string.main_error_remove);
                                     break;
                                 default:
-                                    callback.onError(MainEvent.ERROR_SERVER,R.string.main_error_server);
+                                    callback.onError(MainEvent.ERROR_SERVER, R.string.main_error_server);
                             }
                         }
                     }

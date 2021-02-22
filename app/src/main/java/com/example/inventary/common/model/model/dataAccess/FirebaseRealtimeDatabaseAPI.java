@@ -4,6 +4,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class FirebaseRealtimeDatabaseAPI {
+
+    private static final String PATH_PRODUCTS = "products";
     private DatabaseReference reference;
     private static FirebaseRealtimeDatabaseAPI INSTANCE = null;
 
@@ -24,5 +26,8 @@ public class FirebaseRealtimeDatabaseAPI {
         return reference;
     }
 
+    public DatabaseReference getProductsReference() {
+        return getReference().child(PATH_PRODUCTS);
+    }
 
 }

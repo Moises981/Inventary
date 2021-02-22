@@ -1,23 +1,31 @@
 package com.example.inventary.mainModule.view;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.example.inventary.R;
+import com.example.inventary.addModule.view.AddProductkFragment;
 import com.example.inventary.common.pojo.Product;
 import com.example.inventary.databinding.ActivityMainBinding;
 import com.example.inventary.databinding.ContentMainBinding;
+import com.example.inventary.detailModule.view.DetailFragment;
 import com.example.inventary.mainModule.MainPresenter;
 import com.example.inventary.mainModule.MainPresenterClass;
 import com.example.inventary.mainModule.view.adapters.ProductAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
@@ -39,13 +47,20 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         bnd = ActivityMainBinding.inflate(getLayoutInflater());
         //bndMain = bndMain.bind(bnd.getRoot());
         setContentView(bnd.getRoot());
-
+        bnd.fab.setOnClickListener(onAddClicked);
         configToolbar();
         configAdapter();
         configRecyclerView();
         mPresenter = new MainPresenterClass(this);
         mPresenter.onCreate();
     }
+    
+    private View.OnClickListener onAddClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new AddProductkFragment().show(getSupportFragmentManager(),getString(R.string.addProduct_title));
+        }
+    };
 
 
     private void configToolbar() {
@@ -144,11 +159,39 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public void onItemClick(Product product) {
+        Bundle arguments = new Bundle();
+        arguments.putString(Product.ID,product.getId());
+        arguments.putString(Product.NAME,product.getName());
+        arguments.putInt(Product.QUANTITY,product.getQuantity());
+        arguments.putString(Product.PHOTO_URL,product.getPhotoUrl());
+
+        Fragment fragment = new DetailFragment();
+        fragment.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.contentMain,fragment)
+                .addToBackStack(null)
+                .commit();
 
     }
 
     @Override
     public void onLongItemClick(Product product) {
+
+        Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+        if(vibrator != null){
+            vibrator.vibrate(60);
+        }
+
+        new AlertDialog.Builder(this).setTitle(R.string.main_dialog_remove_title)
+                .setMessage(R.string.main_dialog_remove_message)
+                .setPositiveButton(R.string.main_dialog_remove_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mPresenter.remove(product);
+                    }
+                })
+                .setNegativeButton(R.string.common_dialog_cancel,null)
+                .show();
 
     }
 }

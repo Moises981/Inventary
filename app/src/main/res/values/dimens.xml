@@ -3,4 +3,8 @@
     <dimen name="item_product_height">128dp</dimen>
     <dimen name="common_item_cornerRadius">4dp</dimen>
     <dimen name="item_product_padding">4dp</dimen>
+    <dimen name="add_padding_main">16dp</dimen>
+    <dimen name="add_photo_size_width">96dp</dimen>
+    <dimen name="add_photo_size_height">80dp</dimen>
+    <dimen name="md_btn_minWidth">88dp</dimen>
 </resources>
